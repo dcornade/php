@@ -1,0 +1,1242 @@
+                                               appointment.php
+<?php include("logo.php");
+include("links.php");
+$conn=mysqli_connect("localhost","root","","durcollege");
+	if(!$conn){
+		die("Error in Connecting".mysqli_error());
+	}
+if(isset($_POST['b1'])){
+	$n1=ucwords($_POST['i1']);
+	$p1=$_POST['i2'];
+	$e1=$_POST['i3'];
+	$d1=$_POST['d1'];
+	$t1=$_POST['s1'];
+	$str="insert into apoont value('$n1','$p1','$e1','$d1','$t1')";
+	mysqli_query($conn,$str);
+	header("location:index.php");
+}
+?>
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Untitled Document</title>
+</head>
+
+<body class="appontbody">
+	<form method="post" name="frm1">
+	<div class="feedback">
+	<h1>Discover Yourself with Councelling with us and Discover your Passion!</h1>	
+	<fieldset>
+		<legend>Appointment Form</legend>
+		<table>
+		<tr><th>Name: - </th><th><input type="text" name="i1"></th></tr>
+		<tr><th>Phone No: - </th><th><input type="text" name="i2" value=""></th></tr>
+		<tr><th>Email Id: - </th><th><input type="text" name="i3" value=""></th></tr>
+		<tr><th>Appointment Date: -</th><th><input type="date" name="d1" value=""></th></tr>
+		<tr><th>Appointment Time: -</th><th><select name="s1">
+			<option>10:00PM-11.00PM</option>
+			<option>11:00PM-12.00PM</option>
+			<option>12:00PM-01.00AM</option>
+			<option>01:00AM-02.00PM</option>
+			<option>02:00AM-03.00PM</option>
+			<option>03:00AM-04.00PM</option>
+			<option>04:00AM-05.00PM</option></select></th></tr>
+		
+		<tr><td><button type="submit" name="b1">Submit</button></td><td><button type="submit" name="b2" style="background-color:red;">Cancel</button></td></tr>
+		</table>
+	</fieldset>
+	</div>
+	</form>
+</body>
+</html>
+<?php include("footer.php");?>
+                                                            batchcal.php
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Untitled Document</title>
+</head>
+
+<body>
+</body>
+</html>
+<?php 
+$conn=mysqli_connect("localhost","root","","durcollege");
+if(!$conn){
+	die("error Connecting".mysqli_error($conn));
+}
+$p=$_GET['q'];
+$str="SELECT * FROM `batch` WHERE `batch`='$p' ";
+	$res=mysqli_query($conn,$str);
+
+echo "Select The Batch: -<select name='s3'><option>select the batch</option>";
+	while($rows=mysqli_fetch_assoc($res)){
+			echo "<option>".$rows['bname']."</option>";
+		}
+echo "</select>"
+
+?>
+                                                 class.php
+<?php include("logo.php");
+include("links.php");
+$conn=mysqli_connect("localhost","root","","durcollege");
+if(!$conn){
+	die("Connection Error".mysqli_errno());
+}
+	$sql="select * from mdata";
+ 	$result2=mysqli_query($conn,$sql);
+if(isset($_POST['b1'])){
+	$_SESSION['del']=$_POST['b1'];
+	header("location:delete.php");
+}
+if(isset($_POST['b2'])){
+	$_SESSION['upd']=$_POST['b2'];
+	header("location:mudpt.php");
+}
+?>
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Database</title>
+</head>
+<link rel="stylesheet" href="assets/effect.css">
+<link rel="stylesheet" href="assets/css/all.css">
+<body >
+	<form method="post" class="database">
+		
+		<div class="side">
+			<a href="data.php">Personal Data</a>
+			<a href="class.php">Marks Data</a>
+			<a href="insert.php">Insert New Data</a>
+		</div>
+		<div class="main1">
+		<h1>Examination Results of all Individuals</h1>
+			<table>
+				<tr>
+					<th>Roll No.</th>
+					<th>Name</th>
+					<th>Module-I</th>
+					<th>Module-II</th>
+					<th>Module-III</th>
+					<th>Module-IV</th>
+					<th>Module-V</th>
+					<th>Total</th>
+					<th>Grade</th>
+					<th>Delete</th>
+					<th>Update</th>
+				</tr>
+				<?php
+					while($rows=mysqli_fetch_assoc($result2)){
+						echo "<tr>";
+						echo "<td>".$rows['sroll']."</td>";
+						echo "<td>".$rows['name']."</td>";
+						echo "<td>".$rows['mod1']."</td>";
+						echo "<td>".$rows['mod2']."</td>";
+						echo "<td>".$rows['mod3']."</td>";
+						echo "<td>".$rows['mod4']."</td>";
+						echo "<td>".$rows['mod5']."</td>";
+						echo "<td>".$rows['total']."</td>";
+						echo "<td>".$rows['grade']."</td>";
+						echo "<td><button id='delete' type='submit' name='b1' value='".$rows['name']."'>Delete</button>";
+						echo "<td><button id='update' type='submit' name='b2' value='".$rows['name']."'>Update</button>";
+					}
+				?>
+			</table>
+		</div>
+	</form>
+</body>
+</html>
+<?php include("footer.php");
+?>
+                                                                  data.php
+<?php include("logo.php");
+include("links.php");
+$conn=mysqli_connect("localhost","root","","durcollege");
+if(!$conn){
+	die("Connection Error".mysqli_errno());
+}
+	$sql="select * from pdata";
+ 	$result2=mysqli_query($conn,$sql);
+if(isset($_POST['b1'])){
+	$_SESSION['del']=$_POST['b1'];
+	header("location:delete.php");
+}
+if(isset($_POST['b2'])){
+	$_SESSION['upd']=$_POST['b2'];
+	header("location:updt.php");
+}
+?>
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Database</title>
+</head>
+<link rel="stylesheet" href="assets/effect.css">
+<link rel="stylesheet" href="assets/css/all.css">
+<body >
+	<form method="post" class="database">
+		
+		<div class="side">
+			<a href="data.php">Personal Data</a>
+			<a href="class.php">Marks Data</a>
+			<a href="insert.php">Insert New Data</a>
+			
+		</div>
+		<div class="main1">
+		<h1>Personal data for all Individuals</h1>
+			<table>
+				<tr>
+					<th>Roll No.</th>
+					<th>Name</th>
+					<th>Registration</th>
+					<th>Batch</th>
+					<th>Course</th>
+					<th>City</th>
+					<th>Date of Birth</th>
+					<th>Date of Joining</th>
+					<th>Delete</th>
+					<th>Update</th>
+				</tr>
+				<?php
+					while($rows=mysqli_fetch_assoc($result2)){
+						echo "<tr>";
+						echo "<td>".$rows['sroll']."</td>";
+						echo "<td>".$rows['name']."</td>";
+						echo "<td>".$rows['registration']."</td>";
+						echo "<td>".$rows['batch']."</td>";
+						echo "<td>".$rows['course']."</td>";
+						echo "<td>".$rows['address']."</td>";
+						echo "<td>".$rows['bdate']."</td>";
+						echo "<td>".$rows['jdate']."</td>";
+						echo "<td><button id='delete' type='submit' name='b1' value='".$rows['name']."'>Delete</button>";
+						echo "<td><button id='update' type='submit' name='b2' value='".$rows['name']."'>Update</button>";
+					}
+				?>
+			</table>
+		</div>
+	</form>
+</body>
+</html>
+<?php include("footer.php");
+?>
+                                                          delete.php
+<?php include("logo.php");
+include("links.php");
+$conn=mysqli_connect("localhost","root","","durcollege");
+if(!$conn){
+	die("Connection Error".mysqli_errno());
+}
+$n=$_SESSION['del'];
+if(isset($_POST['b1'])){
+	$str1="delete from `mdata` where `name`='$n'";
+	mysqli_query($conn,$str1);
+	$str="delete from `pdata` where `name`='$n'";
+	if(mysqli_query($conn,$str)){
+		header("location:data.php");
+	}
+}
+?>
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Untitled Document</title>
+</head>
+<link rel="stylesheet" type="text/css" href="assets/effect.css">
+<link rel="stylesheet" type="text/css" hresf="assets/css/all.css">
+<body class="del">
+	<form method="post">
+	<div class="men">Are you sure you want to delete <?php echo $_SESSION['del']; ?>'s data?<br><br>   
+		<button name="b1" type="submit" >Delete</button><br><br>
+	<button name="b2" type="submit">Cancel</button></div></form>
+</body>
+</html>
+<?php include("footer.php");
+?>
+                                                   feedback.php
+<?php include("logo.php");
+include("links.php");
+$conn=mysqli_connect("localhost","root","","durcollege");
+	if(!$conn){
+		die("Error in Connecting".mysqli_error());
+	}
+if(isset($_POST['b1'])){
+	$n1=ucwords($_POST['i1']);
+	$p1=$_POST['i2'];
+	$e1=$_POST['i3'];
+	$f1=$_POST['i4'];
+	$s1=$_POST['i5'];
+	$l1=$_POST['t1'];
+	$str="insert into fedback values('$n1','$p1','$e1','$f1','$s1','$l1')";
+	mysqli_query($conn,$str);
+	
+}
+?>
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Untitled Document</title>
+</head>
+<link rel="stylesheet" href="assets/effect.css">
+<link rel="stylesheet" href="assets/css/all.css">
+<body>
+	<form method="post" name="frm1">
+	<div class="feedback">
+	<h1>We want to Improve in all the way we can! help us improve more by some suggestions</h1>	
+	<fieldset>
+		<legend>Feedback Form</legend>
+		<table>
+		<tr><th>Name: - </th><th><input type="text" name="i1" value=""></th></tr>
+		<tr><th>Phone No: - </th><th><input type="text" name="i2" value=""></th></tr>
+		<tr><th>Email Id: - </th><th><input type="text" name="i3" value=""></th></tr>
+		<tr><th>Feedback Subject</th><th><input type="text" name="i4" value=""></th></tr>
+		<tr><th>Short Discription: -</th><th><input type="text" name="i5" value=""></th></tr>
+		<tr><th rowspan="4">Long Discription</th><th  rowspan="4"><textarea name="t1" rows="4" cols="54"></textarea></th></tr>
+			<tr></tr>
+			<tr></tr>
+			<tr></tr>
+			<tr></tr>
+		<tr><td><button type="submit" name="b1">Submit</button></td><td><button type="submit" name="b2" style="background-color:red;">Cancel</button></td></tr>
+		</table>
+	</fieldset>
+	</div>
+	</form>
+</body>
+</html>
+<?php include("footer.php");?>
+                                                     footer.php
+<?php if(!isset($_SESSION['webcount'])){
+	$_SESSION['webcount']=1;
+}
+?>
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Untitled Document</title>
+</head>
+<link rel="stylesheet" type="text/css" href="assets/effect.css">
+<link rel="stylesheet" type="text/css" href="assets/css/all.css">
+<body>
+	<div class="footer"><hr>
+		<marquee>This project is made by Durgesh Tiwari Roll-P05201913C</marquee>
+		<?php 
+	$_SESSION['webcount']++;
+	echo "<center>Website is visited ".$_SESSION['webcount']." Times </center>";
+?>
+	</div>
+	
+</body>
+</html>
+                                          home.php
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Untitled Document</title>
+</head>
+this is home page right?
+<body>
+</body>
+</html>
+                                           index.php
+<?php include("logo.php");
+include("links.php");
+?>
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" type="text/css" href="assets/effect.css">
+<link rel="stylesheet" type="text/css" href="assets/css/all.css">
+<title>Project File</title>
+</head>
+<body>
+
+</body>
+</html>
+<?php include("footer.php");
+?>
+                                        insert.php
+<?php include("logo.php");
+include("links.php");
+if(!isset($c)){
+	$c="";
+}
+$conn=mysqli_connect("localhost","root","","durcollege");
+if(!$conn){
+	die("Connection Error".mysqli_errno());
+}
+	$sql="select * from pdata";
+ 	$result2=mysqli_query($conn,$sql);
+if(isset($_POST['b1'])){
+	$b1=$_POST['s1'];
+	$b2=$_POST['i1'];
+	$b3=$_POST['d1'];
+	$b4=$_POST['d2'];
+	$str="insert into batch values('$b1','$b2','$b3','$b4')";
+if(mysqli_query($conn,$str)){
+	$c="Batch Created Succesfully";
+	
+}
+}
+if(isset($_POST['b2'])){
+	$fname=ucfirst($_POST['i2']);
+	$mname=ucfirst($_POST['i3']);
+	$lname=ucfirst($_POST['i4']);
+	$flname=$fname." ".$mname." ".$lname;
+	$crs=$_POST['s2'];
+	$btc=$_POST['s3'];
+	$rgs=$_POST['i5'];
+	$rl=$_POST['i6'];
+	$prv=$_POST['s4'];
+	$cty=$_POST['i7'];
+	$dob=$_POST['d3'];
+	$doj=$_POST['d4'];
+	
+	$m1=$_POST['i8'];
+	$m2=$_POST['i9'];
+	$m3=$_POST['i10'];
+	$m4=$_POST['i11'];
+	$m5=$_POST['i12'];
+	$ttl=$_POST['i13'];
+	$grd=$_POST['i14'];
+	$strl="insert into pdata values('$flname','$prv','$rgs','$btc','$crs','$rl','$cty','$dob','$doj')";
+	$stql="insert into mdata values('$rl','$flname','$m1','$m2','$m3','$m4','$m5','$ttl','$grd')";
+	mysqli_query($conn,$stql);
+	mysqli_query($conn,$strl);
+}
+?>
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Database</title>
+</head>
+<link rel="stylesheet" href="assets/effect.css">
+<link rel="stylesheet" href="assets/css/all.css">
+<script>
+function showUser(str) {
+    if (str == "") {
+        document.getElementById("opt").innerHTML = "";
+        return;
+    } else {
+        if (window.XMLHttpRequest) {
+            xmlhttp = new XMLHttpRequest();
+        } else {
+          
+            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xmlhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                document.getElementById("opt").innerHTML = this.responseText;
+            }
+        };
+        xmlhttp.open("GET","batchcal?q="+str,true);
+        xmlhttp.send();
+    }
+}
+	function calc(){
+		 var a=Number(document.frm1.i8.value);
+		var b=Number(document.frm1.i9.value);
+		var c=Number(document.frm1.i10.value);
+		var d=Number(document.frm1.i11.value);
+		var e=Number(document.frm1.i12.value);
+		var total=a+b+c+d+e;
+		document.frm1.i13.value=total;
+	}
+</script>
+<body >
+	<form method="post" class="database" name="frm1">
+		
+		<div class="side">
+			<a href="data.php">Personal Data</a>
+			<a href="class.php">Marks Data</a>
+			<a href="insert.php">Insert New Data</a>
+		</div>
+		<div class="main1">
+			<fieldset class="ifeld">
+				<legend>Create a new Batch</legend>
+				<span class="text">Select a New Batch's Course :- <select name="s1">
+												<option>Select a Course</option>
+												<option>CCA</option>
+												<option>CCPA</option>
+												<option>CACPA</option>
+												<option>CSE</option>
+												<option>CBM</option>
+												<option>CFA</option>
+												<option>CET</option>
+												<option>CPM</option>
+												<option>GDP</option>
+												</select></span>
+				<span class="text">Name of The Batch :-<input type="text" name="i1"><br><br></span>
+				<span class="text">Starts from : -<input type="date" name="d1"><br><br><br></span>
+				<span class="text">Ends in : -<input type="date" name="d2"></span><?php echo $c ?>
+				<button type="submit" value="classcreate" name="b1">Create a Batch</button>
+			</fieldset>
+			<fieldset class="ifeld">
+			<legend>New Student Insertion Form</legend>
+				<fieldset class="ifeld">
+					<legend>Personal Information</legend>
+					<span class="text">First Name: - <input type="text" name="i2"></span>
+				  <span class="text">Middle Name: - <input type="text" name="i3"></span>
+					<span class="text">Last Name: - <input type="text" name="i4"></span><br>
+					<span class="text">Select a New Batch's Course :- <select name="s2" onchange="showUser(this.value)">
+												<option>Select a Course</option>
+												<option>CCA</option>
+												<option>CCPA</option>
+												<option>CACPA</option>
+												<option>CSE</option>
+												<option>CBM</option>
+												<option>CFA</option>
+												<option>CET</option>
+												<option>CPM</option>
+												<option>GDP</option>
+												</select></span>
+					<span class="text" id="opt"></span><br><br><br>
+					<span class="text" id="reg" onchange="showerror(this.value)">Enter Registration Number: -<input type="text" name="i5"></span><span class="error" id="reger"></span><br><br>
+					<span class="text">Enter Roll Number: -<input type="text" name="i6"></span><br><br>
+					<span class="text">Select Privilege: -<select name="s4">
+						<option>Select privilege</option>
+						<option>admin</option>
+						<option>user</option></select></span><br><br>
+					<span class="text">City: - <input type="text" name="i7"></span><br><br>
+					<span class="text">Date of Birth: -<input type="date" name="d3"></span><br><br>
+					<span class="text">Date of Joining: -<input type="date" name="d4"></span>
+				</fieldset>
+				<fieldset class="ifeld">
+				<legend>Marks & Grade</legend>
+					<span class="text">Module-I: -<input type="text" name="i8"></span>
+					<span class="text">Module-II: -<input type="text" name="i9"></span>
+					<span class="text">Module-III: -<input type="text" name="i10"></span><br><br>
+					<span class="text">Module-IV: -<input type="text" name="i11"></span>
+					<span class="text">Module-V: -<input type="text" name="i12" onchange="calc()"></span><br><br>
+					<span class="text">Total: -<input type="text" name="i13"></span><br><br>
+					<span class="text">Grade -<input type="text" name="i14"></span>
+					<button name="b2" type="submit">Insert New Record</button>
+				</fieldset>
+			</fieldset>
+		</div>
+</body>
+</html>
+	<?php include("footer.php");
+?>
+                                                  links.php
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Untitled Document</title>
+<link rel="stylesheet" type="text/css" href="assets/effect.css">
+<link rel="stylesheet" type="text/css" hresf="assets/css/all.css">
+<script>
+	function openbar(){
+		document.getElementById("mysidebar").style.width = "250px";
+		document.getElementById("main").style.marginLeft = "250px";
+		document.body.style.backgroundColor = "rgba(0,0,0,0.4)";
+	}
+	function closebar(){
+		document.getElementById("mysidebar").style.width = "0"
+		document.body.style.backgroundColor = "white";
+	}
+</script>
+</head>
+<body>
+	<div id="mysidebar" class="sidebar">
+	<a href="javascript:void(0)" class="fas fa-bars fa-lg clsbtn" onClick="closebar()"></a>
+		<a href="<?php if($_SESSION['log']=="in"){echo "prfl.php";}else{echo "login.php";} ?>" class="<?php if($_SESSION['log']=="in"){echo "fas fa-user";}else{ echo "fas fa-door-closed";} ?>"><?php if($_SESSION['log']=="in"){echo "Your Profile";}else{echo "login page";}  ?></a>
+		<?php if($_SESSION['log']=="in"){ if($_SESSION['oren']=="admin"){ echo '<a href="notific.php" class="fas fa-bell">Notifications</a>';}else{echo "<a href='mdata.php' class='fas fa-pencil-ruler'>Marks</a>";}} ?>
+		<?php if($_SESSION['log']=="in"){ if($_SESSION['oren']=="admin"){ echo '<a href="data.php" class="fas fa-database">Manage Database';} }?>
+		<?php if($_SESSION['log']=="in"){echo '<a href="logout.php" class="fas fa-door-open">Logout</a>';} ?>
+		
+	</div>
+	<div class=lnk><ul><li><span class="fas fa-bars fa-lg sidenav" onClick="openbar()"></span></li><li><a href="index.php" class="fas fa-home fa-lg">Home</a></li><li><a href="news.php" class="fas fa-newspaper fa-lg">News</a></li>
+	<li class="drpdwn">
+		<a class="drpbtn fas fa-angle-down fa-lg">Courses</a>
+		<div class="drp-cnt">
+			<a href="soft.php">Software Courses</span></a><a href="multi.php">Multimedia Courses</a><a href="shortcrs.php">Short Courses</a><a href="sopken.php">Spoken English</a>
+		</div></li><li><a href="feedback.php" class="fas fa-lg">Feedback</a></li><li class="<?php if($_SESSION['log']=="in"){echo "prfl";}else{echo "rqst";} ?> fas fa-lg"><a href="<?php if($_SESSION['log']=="in"){echo "prfl.php";}else{ echo "appointment.php"; } ?>" class="<?php if($_SESSION['log']=="in"){echo "fas fa-user";}else{echo "fa-angle-double-right";} ?>"><?php if($_SESSION['log']=="in"){echo " Hello Mr. ".$_SESSION['user'];}else{echo "Book An Appointment now!";} ?></a></li></ul></div>
+</body>
+</html>
+                                      login.php
+<?php include("logo.php");
+	  include("links.php");
+$uerr=$pwerd="";
+if($_POST){
+	$count=1;
+	$usr=$_POST['i1'];
+	$pswd=$_POST['i2'];
+	if(($usr=="")and($pswd=="")){
+		$uerr="Please Fill required fields";
+	}
+	$conn=mysqli_connect("localhost","root","","durcollege");
+	if(!$conn){
+		die("Error in Connecting".mysqli_error());
+	}
+	$sql="select * from register";
+	$result=mysqli_query($conn,$sql);
+	while($rows=mysqli_fetch_assoc($result)){
+	if(($rows['uname']==$usr)and($rows['pass']==$pswd)){
+		if($rows['privilage']=='admin'){
+			$_SESSION['oren']="admin";
+			$_SESSION['user']=$rows['name'];
+			$_SESSION['log']="in";
+			header("location:index.php");
+			
+		}else{
+			$_SESSION['user']=$rows['name'];
+			header("location:index.php");
+			$_SESSION['log']="in";
+			$_SESSION['oren']="user";
+		}
+	}else{
+		$count++;
+	}
+}if($count==1){
+		$uerr="Username or Password is incorrect";
+	}
+}
+?>
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Untitled Document</title>
+<link rel="stylesheet" type="text/css" href="assets/effect.css">
+<link rel="stylesheet" type="text/css" href="assets/css/all.css">
+</head>
+
+<body class="login">
+<form method="post">
+<div class="instr"><ul>Note:<li><i class="fas fa-arrow-right fa-sm"></i>To login you must have to be a Staff or a Student of the Eshtablisment</li>
+	<li><i class="fas fa-arrow-right fa-sm"></i>Please Login using Your Student Id or User Id given to you on The time of Registration</li><br>
+	<li style="color: red; background-color: aqua; font-size:1.7vw; border-radius: 12px; padding:10px; text-align: center; ">Haven't registered yet?</li><br><li style="font-size:1.7vw; magrin-left:50%;"><a href="registration.php">Click Here To register</a></li>
+	</ul> </div>
+	<div class="lgnfrm"><img src="assets/user.jpg" alt="userphoto" class="lgnimg"><div class="lgnfrmtxt">Input Your Username or Student Id<br><input type="text" name="i1"><br><span class="error"><?php echo $uerr; ?></span><br><div class="lgnfrmtxt">Input your Passowrd below<br><input type="password" name="i2"><br><input type="submit" name="b1" value="Login"><input type="reset" name="b2" value="Cancel" href="index.php">
+	</div></div></div>
+</form>
+</body>	
+</html>
+<?php include("footer.php");
+?>
+                                                        logo.php
+<?php 
+	session_start();
+ if(!isset($_SESSION['log'])){
+	 $_SESSION['log']="out";
+ }
+?>
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title></title>
+<link rel="stylesheet" href="assets/effect.css">
+<link rel="stylesheet" href="assets/css/all.css">
+</head>
+<body>
+	<div>
+	<ul class="logo"><li class="logo_log"><img src="assets/rlogo.png" style="max-width: 90%; height: auto;" ></li><li class="logo_bog"><i class="fas fa-book-reader fa-4x tp"></i></li><li class="logo_text"><i class="llf">All Power Is Within You; You Can Do Anything And Everything....</i></li><li><img src="assets/vivekananda.png" alt="vivekanada picture" class="pic logo_picture" style="width: auto; height: auto;"></li></ul></div>
+</body>
+</html>
+							logout.php
+<?php include("logo.php");
+      include("links.php");
+if($_POST){
+	$_SESSION['user']="";
+	$_SESSION['oren']="";
+	$_SESSION['log']="out";
+	header("location:index.php");
+}
+?>
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Untitled Document</title>
+<link rel="stylesheet" href="assets/effect.css">
+<link rel="stylesheet" href="assets/css/all.css">
+</head>
+
+<body class="lgbody">
+<form method="post">
+<div class="lgout">
+    <span> <span>Are you sure you want to logout?</span><br>
+    <input type="submit" name="b1" value="Logout">
+</div>
+</form>
+</body>
+</html>
+	<?php include("footer.php");
+?>
+							mdata.php
+<?php include("logo.php");
+include("links.php");
+$conn=mysqli_connect("localhost","root","","durcollege");
+if(!$conn){
+	die("Connection Error".mysqli_errno());
+}
+$str="select * from mdata";
+$result=mysqli_query($conn,$str);
+while($rows=mysqli_fetch_assoc($result)){
+	if($rows['name']==$_SESSION['user']){
+		$n=$rows['name'];
+		$r=$rows['sroll'];
+		$m1=$rows['mod1'];
+		$m2=$rows['mod2'];
+		$m3=$rows['mod3'];
+		$m4=$rows['mod4'];
+		$m5=$rows['mod5'];
+		$ttl=$rows['grade'];
+		$grd=$rows['grade'];
+	}
+}
+?><!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Untitled Document</title>
+</head>
+<link rel="stylesheet" type="text/css" href="assets/effect.css">
+<link rel="stylesheet" type="text/css" hresf="assets/css/all.css">
+<body class="prflbody">
+	<form method="post">
+	<div >
+		<fieldset class="lginfo">
+		<legend>Your Marks</legend>
+			<table>
+				<tr>
+			<th>Name: -</th>
+				<th><input type="text" name="i1" value="<?php echo $n; ?>"</th></tr>
+								<tr>
+									<th>RollNo:-</th><th><input type="text" name="i2" value="<?php echo $r; ?>"</th></tr>
+				<tr><th>Module - I: -</th><th><input type="text" name="i3" value="<?php echo $m1; ?>"</th></tr>
+				<tr><th>Module - II: -</th><th><input type="text" name="i4" value="<?php echo $m2; ?>"</th></tr>
+				<tr><th>Module - III: -</th><th><input type="text" name="i5" value="<?php echo $m3; ?>"</th></tr>
+				<tr><th>Module - IV: -</th><th><input type="text" name="i6" value="<?php echo $m4; ?>"</th></tr>
+				<tr><th>Module - V: -</th><th><input type="text" name="i7" value="<?php echo $m5; ?>"</th></tr>
+				<tr><th>Total: -</th><th><input type="text" name="i8" value="<?php echo $ttl; ?>"</th></tr>
+				<tr><th>Grade: -</th><th><input type="text" name="i9" value="<?php echo $grd; ?>"</th></tr>
+			</table>
+		</fieldset>
+</body>
+</html>
+						mudpt.php
+<?php include("logo.php");
+include("links.php");
+$conn=mysqli_connect("localhost","root","","durcollege");
+if(!$conn){
+	die("Error in Connecting".mysqli_query($conn));
+}
+$str3="select * from mdata";
+$result4=mysqli_query($conn,$str3);
+if(isset($_POST['b1'])){
+	$n1=$_POST['i1'];
+	$r1=$_POST['i2'];
+	$m11=$_POST['i3'];
+	$m12=$_POST['i4'];
+	$m13=$_POST['i5'];
+	$m14=$_POST['i6'];
+	$m15=$_POST['i7'];
+	$t1=$_POST['i8'];
+	$g1=$_POST['i9'];
+	$str5="UPDATE `mdata` SET `sroll`='$r1',`name`='$n1',`mod1`='$m11',`mod2`='$m12',`mod3`='$m13',`mod4`='$m14',`mod5`='$m15',`total`='$t1',`grade`='$g1' WHERE `name`='$n1'";
+	mysqli_query($conn,$str5);
+	header("location:class.php");
+}
+if(isset($_POST['b2'])){
+	header("location:class.php");
+}
+
+while($rows5=mysqli_fetch_assoc($result4)){
+	if($rows5['name']==$_SESSION['upd']){
+		$n=$rows5['name'];
+		$r=$rows5['sroll'];
+		$m1=$rows5['mod1'];
+		$m2=$rows5['mod2'];
+		$m3=$rows5['mod3'];
+		$m4=$rows5['mod4'];
+		$m5=$rows5['mod5'];
+		$t=$rows5['total'];
+		$g=$rows5['grade'];
+	}
+}
+?>
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Untitled Document</title>
+</head>
+<script>function calc(){
+		 var a=Number(document.frm1.i3.value);
+		var b=Number(document.frm1.i4.value);
+		var c=Number(document.frm1.i5.value);
+		var d=Number(document.frm1.i6.value);
+		var e=Number(document.frm1.i7.value);
+		var total=a+b+c+d+e;
+		document.frm1.i8.value=total;
+	}</script>
+<body>
+	<form method="post" name="frm1">
+<fieldset class="ifeld">
+	<legend>Update Given Marks</legend>
+	<table>
+		<tr><th>Name: -</th><th><input type="text" name="i1" value="<?php echo $n ?>" readonly></th></tr>
+		<tr><th>Roll Number -</th><th><input type="text" name="i2" value="<?php echo $r ?>" readonly></th></tr>
+		<tr><th>Module-I</th><th><input type="text" name="i3" value="<?php echo $m1 ?>"></th><th>Module-II</th><th><input type="text" name="i4" value="<?php echo $m2 ?>"></th></tr>
+		<tr><th>Module-III</th><th><input type="text" name="i5" value="<?php echo $m3 ?>"></th><th>Module-IV</th><th><input type="text" name="i6" value="<?php echo $m4 ?>"></th></tr>
+		<tr><th>Module-V</th><th><input type="text" name="i7" value="<?php echo $m5 ?>" onChange="calc()"></th></tr>
+		<tr><th>Total: -</th><th><input type="text" name="i8" value="<?php echo $t ?>"></th></tr>
+		<tr><th>Grade: -</th><th><input type="text" name="i9" value="<?php echo $g ?>"></th></tr>
+		<tr><th><button type="submit" name="b1">Update</button></th><th><button type="submit" name="b2" style="background-color:red">Cancel</button></th></tr>
+	</table>
+		</fieldset>
+</body>
+</html>
+<?php include("footer.php");
+?>
+							notific.php
+<?php include("logo.php");
+include("links.php"); ?>
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Notifications</title>
+</head>
+
+<body class="notbody">
+	<form method="post">
+		<a href="appoint.php"><div class="rqewst"><center><i class="fas fa-handshake fa-4x"></i></center>
+		 Meeting Appointment requests
+		</div></a>
+		<a href="datachange.php"><div class="rqewst">
+		<i class="fas fa-user-cog fa-4x"></i><br>
+			Students Data change requests
+			</div></a>
+		<a href="feed.php"><div class="rqewst">
+		<i class="fas fa-comments fa-4x"></i><br>
+			Feedback Forms Notifications
+			</div></a>
+	</form>
+</body>
+</html>
+<?php include("footer.php");
+?>
+								prfl.php
+<?php include("logo.php");
+include("links.php");
+$conn=mysqli_connect("localhost","root","","durcollege");
+	if(!$conn){
+		die("Error in Connecting".mysqli_error());
+	}
+if(!isset($privil)){
+	$privil="";
+}
+$user=$_SESSION['user'];
+	if(isset($_POST['b1'])){
+	 		if($_SESSION['b']=="Change Your Password"){
+			$_SESSION['chnge']="";
+			$_SESSION['b']="Save";
+			}else{
+				echo $user;
+				$up=$_POST['i2'];
+				$strp="UPDATE `register` SET `pass`='$up' WHERE `name`='$user'";
+				if(mysqli_query($conn,$strp)){
+					$succs="Record Updated Succesfully";
+				}
+				$_SESSION['chnge']="readonly";
+				$_SESSION['b']="Change Your Password";
+			}
+		}
+ 	$str="select * from register where name='$user'";
+	$result=mysqli_query($conn,$str);
+$rows=mysqli_fetch_assoc($result);
+		
+$p=$rows['pass'];
+$u=$rows['uname'];
+
+if(isset($_POST['b2'])){
+	if($_SESSION['oren']=="admin"){
+		if($_SESSION['b1']=="&#xf304;  Edit"){
+			$_SESSION['chnge1']="";
+			$_SESSION['b1']="&#xf304;  Save";
+			}else{
+			$nm=$_POST['i3'];
+			$pr=$_POST['i4'];
+			$rgn=$_POST['i5'];
+			$btch=$_POST['i6'];
+			$crse=$_POST['i7'];
+			$rollno=$_POST['i8'];
+			$addr=$_POST['i9'];
+			$dob=$_POST['i10'];
+			$jod=$_POST['i11'];
+		$u1="UPDATE `pdata` SET `name`='$nm',`privilage`='$pr',`registration`='$rgn',`batch`='$btch',`course`='$crse',`sroll`='$rollno',`address`='$addr',`bdate`='$dob',`jdate`='$jod' WHERE `name`='$nm'";
+		mysqli_query($conn,$u1);	
+		$_SESSION['chnge1']="readonly";
+		$_SESSION['b1']="&#xf304;  Edit";
+			}
+}else{
+		$privil="User cannot edit data";
+}
+}
+	$str1="select * from pdata where name='$user'";
+	$result1=mysqli_query($conn,$str1);
+	$rows1=mysqli_fetch_assoc($result1);
+	$n=$rows1['name'];
+	$pr=$rows1['privilage'];
+	$reg=$rows1['registration'];
+	$bch=$rows1['batch'];
+	$crs=$rows1['course'];
+	$roll=$rows1['sroll'];
+	$add=$rows1['address'];
+	$bd=$rows1['bdate'];
+	$jd=$rows1['jdate'];
+/*here starts the button mashup*/
+if(!isset($_SESSION['chnge'])){
+	$_SESSION['chnge']="readonly";
+	$_SESSION['chng1']="readonly";
+}
+if(!isset($_SESSION['b'])){
+	$_SESSION['b']="Change Your Password";
+}
+if(!isset($_SESSION['chnge1'])){
+	$_SESSION['chnge1']="readonly";
+}
+if(!isset($_SESSION['b1'])){
+	$_SESSION['b1']="&#xf304;  Edit";
+}	
+if(!isset($succs)){
+	$succs="";
+}
+?>
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" type="text/css" href="assets/effect.css">
+<link rel="stylesheet" type="text/css" href="assets/css/all.css">
+<title>Untitled Document</title>
+<script>
+	function show(){
+		if(document.getElementById("vsbl").type="password"){
+		document.getElementById("vsbl").type="text";	
+		}else{
+			document.getElementById("vsbl").type="password";
+		}
+	}
+</script>
+</head>
+
+<body class="prflbody">
+<form method="post">
+	<div >
+	<fieldset class="lginfo">
+	<Legend>Login Information</Legend>
+		<table>
+			<tr>
+				<th>Your Username is: -</th>
+				<th><input type="text" name="i1" value="<?php echo $u ?>" readonly></th><td></td>
+			</tr>
+		<tr>
+			<th>Your Password is: -</th>
+			<th><input type="password" name="i2" value="<?php echo $p ?>" <?php echo $_SESSION['chnge']; ?> id="vsbl"><span class="fas fa-eye" title="Click to make password Visible" onclick="show();"></span></th>
+			<th><input type="submit" name="b1" value="<?php echo $_SESSION['b']; ?>"></th>
+		</tr>
+		</table>
+	</fieldset></div>
+	<fieldset class="lginfo">
+	<legend>Personal Information</legend>
+		<table>
+			<tr>
+				<th>Name: -</th><th><input type="text" name="i3" value="<?php echo $n ?>"  readonly  ></th><th><input type="submit" class="fas fa-pen"  name="b2" value="<?php echo $_SESSION['b1'] ?>"><span class="error"><?php echo $privil;?></span></th>
+			</tr>
+			<tr>
+				<th>Privilege: -</th><th><input type="text" value="<?php echo $pr ?>" name="i4"  <?php echo $_SESSION['chnge1']; ?>></th>
+			</tr>
+			<tr>
+				<th>Registration Number: -</th><th><input type="text" value="<?php echo $reg ?>" name="i5"  <?php echo $_SESSION['chnge1']; ?>></th>
+			</tr>
+			<tr>
+				<th>Batch: -</th><th><input type="text" name="i6" value="<?php echo $bch ?>"  <?php echo $_SESSION['chnge1']; ?>></th>
+			</tr>
+			<tr>
+				<th>Course: -</th><th><input type="text" name="i7" value="<?php echo $crs ?>"  <?php echo $_SESSION['chnge1']; ?>></th>
+			</tr>
+			<tr>
+				<th>Roll No: -</th><th><input type="text" name="i8" value="<?php echo $roll ?>"  <?php echo $_SESSION['chnge1']; ?>></th>
+			</tr>
+			<tr>
+				<th>Address: -</th><th><input type="text" name="i9"  value="<?php echo $add ?>"  <?php echo $_SESSION['chnge1']; ?>></th>
+			</tr>
+			<tr>
+				<th>Date of Birth: -</th><th><input type="text" name="i10" value="<?php echo $bd ?>"  <?php echo $_SESSION['chnge1']; ?>></th>
+			</tr><tr>
+			<th>Date of Joining: -</th><th><input type="text" name="i11" value="<?php echo $jd ?>"  <?php echo $_SESSION['chnge1']; ?>>
+			</tr><tr><th class="error"><?php echo $succs;?></th></tr>
+		</table>
+	</fieldset>
+</form>
+</body>
+</html>
+<?php include("footer.php");
+?>
+							regcheck.php
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Untitled Document</title>
+</head>
+
+<body>
+	<?php 
+	$q=$_GET['q'];
+	$conn=mysqli_connect("localhost","root","","durcollege");
+	if(!$conn){
+		die("COnnection Error");
+	}
+	$str45="select * from pdata";
+	$result34=mysqli_query($conn,$str45);
+	while($rowser=mysqli_fetch_assoc($result34)){
+		if($rowser['registration']==$q){
+			echo "Register Number Must be Unique";
+		}
+	}
+	echo "XML is working";
+	?>
+</body>
+</html>
+							registration.php
+<?php include("logo.php");
+	  include("links.php");
+if(!isset($_SESSION['userid'])){
+	$_SESSION['userid']="";
+}
+$show="";
+$count=0;
+$ch=2;
+$n1="";
+$uerr=$pwerd="";
+$w1="";
+$user="";
+$conn=mysqli_connect("localhost","root","","durcollege");
+	if(!$conn){
+		die("Error in Connecting".mysqli_error());
+	}
+if(isset($_POST['b1'])){
+	
+	$r1=$_POST['i1'];
+	$str="select * from pdata";
+	$result=mysqli_query($conn,$str);
+	while($rows1=mysqli_fetch_assoc($result)){
+		if($rows1['registration']==$r1){
+			$ch=1;
+			$pr1=$rows1['privilage'];
+			$n1=$rows1['name'];
+			$w1=$rows1['registration'];
+			$srol=$rows1['sroll'];
+		}
+		$count++;
+		
+	}
+	
+	if($ch==1){
+		$str2="select * from register";
+		$result3=mysqli_query($conn,$str2);
+		while($rows2=mysqli_fetch_assoc($result3)){
+			if($rows2['name']==$n1){
+				$show="Already Registered";
+				$n1="";
+			}else{
+				$show="hello Mr. ".$n1;
+		 		$user="std".$count;
+			}
+	}
+	}else{
+		$show="Registration Not Found";
+	}
+	
+	
+}
+if(isset($_POST['b2'])){
+	$u1=$_POST['i1'];
+	$p1=$_POST['i2'];
+	$cp=$_POST['i3'];
+	if($p1==$cp){
+		$str1="insert into register values ('$srol','$u1','$p1','$pr1','$n1')";
+		if(mysqli_query($conn,$str1)){
+			echo "registered Succesfully";
+		}
+	}
+}
+if(isset($_POST['b3'])){
+	header("location:index.php");
+}
+?>
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Untitled Document</title>
+</head>
+
+<body class="login">
+<form method="post">
+<div class="feedback">
+		<fieldset >
+	<legend>Registration Form</legend>
+			<table>
+			<tr><th>Please Enter Registration Id: -  <span class="fas fa-question-circle" title="Registration Number of Your Admission Reciept"></span></th><th><input type="text" name="i1" value="<?php echo $w1?>"></th><td><button type="submit" name="b1">Search</button></td></tr>
+				<tr><th><?php echo $show ?></th></tr>
+			<tr><th>Your User id is: -</th><th><input type="text" name="i2" readonly value="<?php echo $user ?>"></th></tr>
+			<tr><th>Input a Password(case sensitive): -</th><th><input type="text" name="i3" value=""></th>
+				<th>Confirm Password: -</th><th><input type="text" name="i3" value=""></th></tr>
+				<tr><td><button type="submit" name="b2">Submit</button></td><td><button type="submit" name="b3" style="background-color:red;">Cancel</button></td></tr>
+			</table> 
+	</fieldset>
+	</div>
+</form>
+</body>	
+</html>
+							upcal.php
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Untitled Document</title>
+</head>
+<?php 
+$conn=mysqli_connect("localhost","root","","durcollege");
+if(!$conn){
+	die("error Connecting".mysqli_error($conn));
+}
+$p=$_GET['q'];
+$str="SELECT * FROM `batch` WHERE `batch`='$p' ";
+	$res=mysqli_query($conn,$str);
+
+echo "<select name='s3' ><option>select the batch</option>";
+	while($rows=mysqli_fetch_assoc($res)){
+			echo "<option>".$rows['bname']."</option>";
+		}
+echo "</select>"
+?>
+<body>
+</body>
+</html>
+						updt.php
+<?php include("logo.php");
+include("links.php");
+$conn=mysqli_connect("localhost","root","","durcollege");
+if(!$conn){
+	die("Error in Connecting".mysqli_query($conn));
+}
+if(isset($_POST['b1'])){
+	$n1=$_POST['i1'];
+	$r1=$_POST['i2'];
+	$p1=$_POST['s1'];
+	$reg1=$_POST['i3'];
+	$c1=$_POST['s2'];
+	$b1=$_POST['s3'];
+	$cty1=$_POST['i4'];
+	$db1=$_POST['d1'];
+	$jd1=$_POST['d2'];
+	$str2="UPDATE `pdata` SET `name`='$n1',`privilage`='$p1',`registration`='$reg1',`batch`='$b1',`course`='$c1',`sroll`='$r1',`address`='$cty1',`bdate`='$jd1',`jdate`='$jd1' WHERE `name`='$n1'";
+	mysqli_query($conn,$str2);
+	header("location:data.php");
+}
+$str="select * from pdata";
+$str1="select * from batch";
+$result=mysqli_query($conn,$str);
+$result1=mysqli_query($conn,$str1);
+while($rows=mysqli_fetch_assoc($result)){
+	if($rows['name']==$_SESSION['upd']){
+		$n=$rows['name'];
+		$p=$rows['privilage'];
+		$r=$rows['registration'];
+		$b=$rows['batch'];
+		$c=$rows['course'];
+		$roll=$rows['sroll'];
+		$add=$rows['address'];
+		$bd=$rows['bdate'];
+		$jd=$rows['jdate'];
+	}
+}
+if(isset($_POST['b2'])){
+	header("location:data.php");
+}
+?>
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Untitled Document</title>
+</head>
+<script>
+function sel(str){
+    if (str == "") {
+        document.getElementById("select").innerHTML = "";
+        return;
+    } else {
+        if (window.XMLHttpRequest) {
+            obj = new XMLHttpRequest();
+        } 
+        obj.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                document.getElementById("select").innerHTML = this.responseText;
+            }
+        };
+        obj.open("GET","upcal.php?q="+str,true);
+        obj.send();
+    }
+}
+</script>
+<body>
+	<form method="post">
+<fieldset class="ifeld">
+	<legend>Update Personal Information</legend>
+		<table>
+			<tr><th>Name: -</th><th><input type="text" name="i1" value="<?php echo $n; ?>" readonly></th></tr>
+			<tr><th>Roll Number: -</th><th><input type="text" name="i2" value="<?php echo $roll; ?>"></th><th>Privilage: -</th>
+			<th><select name="s1"><option <?php if($p=="admin"){ echo "selected";}?>>admin</option><option <?php if($p=="user"){ echo "selected";}?>>user</option></select></th></tr>
+			<tr><th>Resgistration Number</th><th><input type="text" name="i3" value="<?php echo $r; ?>"</th></tr>
+			<tr><th>Course</th><th><select name="s2" onchange="sel(this.value)">
+												<option <?php if($c=="N.A"){ echo "selected";}?> >N.A</option>
+												<option <?php if($c=="CCA"){ echo "selected";}?>>CCA</option>
+												<option <?php if($c=="CCPA"){ echo "selected";}?>>CCPA</option>
+												<option <?php if($c=="CACPA"){ echo "selected";}?>>CACPA</option>
+												<option <?php if($c=="CSE"){ echo "selected";}?>>CSE</option>
+												<option <?php if($c=="CBM"){ echo "selected";}?>>CBM</option>
+												<option <?php if($c=="CFA"){ echo "selected";}?>>CFA</option>
+												<option <?php if($c=="CET"){ echo "selected";}?>>CET</option>
+												<option <?php if($c=="CPM"){ echo "selected";}?>>CPM</option>
+												<option <?php if($c=="GDP"){ echo "selected";}?>>GDP</option>
+												</select></th>
+			<th >Batch: -</th><th id="select" ><select name="s3" ><?php while($rows1=mysqli_fetch_assoc($result1)){
+	if($c==$rows1['batch']){
+		echo "<option ";
+		if($b==$rows1['bname']){
+			echo " selected";
+		}
+		echo ">".$rows1['bname']."</option>";
+	}
+	}
+				?></select></th></tr>
+			<tr><th>City: -</th><th><input type="text" name="i4" value="<?php echo $add; ?>"></th></tr>
+			<tr><th>Date of Birth: -</th><th><input type="date" name="d1" value="<?php echo $bd;  ?>"></th></tr>
+			<tr><th>Date of Joining: -</th><th><input type="date" name="d2" value="<?php echo $jd;  ?>"></th></tr>
+			<tr><th><button type="submit" name="b1">Update</button></th><th><button type="submit" name="b2" style="background-color:red">Cancel</button></th></tr>
+	</table>
+</fieldset>
+	</form>
+</body>
+</html>
+<?php include("footer.php")
+?>

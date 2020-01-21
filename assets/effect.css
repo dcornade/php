@@ -1,0 +1,745 @@
+@charset "utf-8";
+html{
+	height: 100%;
+}
+body{
+	margin:0;
+	min-height: 100%;
+}
+*{
+	box-sizing: border-box;
+}
+.stk{
+	
+}
+.logo{
+	margin:0;
+	padding:0;
+	list-style: none;
+	display:table;
+	table-layout: fixed;
+	width: 100%;
+	height: 50px;
+	background-color: #0C99D1;
+	z-index: 10;
+}
+.logo_log{
+	display: table-cell;
+	width:30%;
+	padding: 20px;
+	vertical-align: top;
+}
+.logo_bog{
+	display: table-cell;
+	width:7%;
+	vertical-align: top;
+	padding: 10px;
+}
+.logo_text{
+	display: table-cell;
+	width:43%;
+	vertical-align: top;
+	padding: 10px;
+}
+.logo_picture{
+	display: table-cell;
+	width:13%;
+	vertical-align: top;
+	text-align:right;
+	padding-top: 10px;
+	padding-left: 20px;
+}
+.llf{
+	display: inline-block;
+	overflow: auto;
+	font-size: 2vw;
+	font-family:Baskerville, "Palatino Linotype", Palatino, "Century Schoolbook L", "Times New Roman", "serif";
+	color: white;
+	text-align: center;
+}
+.tp{
+	color:yellow;
+}
+/*here starts the link page css */
+.lnk{
+	position: webkit-sticky;
+	position: sticky;
+	top:0;
+	left:0;
+	color:white;
+	background-color:#0C99D1;
+	display: inline-block;
+	width: 100%;
+	z-index: 2;
+}
+.lnk ul{
+	background-color:#0C99D1;
+	margin:0;
+	padding: 0;
+	list-style-type: none;
+}
+.lnk li{
+	background-color:#0C99D1;
+	float:left;
+}
+.lnk a, .sidenav, .drpbtn {
+	text-decoration: none;
+	color:white;
+	background-color: #0C99D1;
+	padding: 15px 30px;
+	display:inline-block;
+	cursor: pointer;
+	transition: 1s;
+}
+.lnk a:hover, .sidenav:hover, .drpdwn:hover .drpbtn {
+	background-color: #07147C
+}
+.lnk .drpdwn {
+	float: left;
+	position: relative;
+}
+.lnk  .drp-cnt{
+	display:none;
+	position: absolute;
+	background-color:#B8B8B8;
+	min-width: 250px;
+	box-shadow: 0px 20px 20px 0px rgba(0,0,0,0.2);
+	z-index: 2;
+	transition: 1s;
+}
+.lnk .drpdwn:hover .drp-cnt{
+	display: block;
+}
+.lnk  .drp-cnt a{
+	text-decoration: none;
+	color:white;
+	text-align: left;
+	font-size:1.5vw;
+	display: block;
+	background-color:#7A7878;
+	font-weight: bold;
+	padding: 10px 30px;
+	transition: 1s;
+}
+.lnk .drp-cnt a:hover {
+	background-color: #131313;
+}
+.lnk .rqst{
+	float:right;
+}
+.lnk .rqst a{
+	float:right;
+	background-color:red;
+	padding:15px 30px;
+}
+.lnk .rqst a:hover{
+	background-color: #DB6C6C;
+}
+.lnk .prfl{
+	float:right;
+}
+.lnk .prfl a{
+	float:right;
+	background-color:rgba(71,70,77,1.00);
+	padding:15px 30px;
+}
+.lnk .prfl a:hover{
+	background-color: rgba(75,56,56,1.00);
+}
+.sidebar{
+	height: 100%;
+	width:0;
+	position: fixed;
+	z-index: 5;
+	top:0;
+	left:0;
+	background-color: #A7A7A7;
+	transition: 0.5s;
+	padding-top: 170px;
+	overflow: hidden;
+}
+.sidebar a{
+	padding: 8px;
+	color:white;
+	text-decoration: none;
+	font-size:1.5vw;
+	display: block;
+	transition:3s;
+	margin: 12px;
+}
+.sidebar a:hover{
+	background-color:#282828;
+}
+.sidebar .clsbtn{
+	position:absolute;
+	top:20px;
+	right: 10px;
+	font-size:2vw;
+	margin:40;
+}
+/* Login page starts here */
+.login {
+	position: relative;
+	padding: 0;
+	margin: 0;
+	background-image: url("temple.jpg");
+	background-color:rgba(0,0,0,0.67);
+	background-attachment: fixed;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+	min-height: 100vh;
+}
+.login .instr {
+	display:relative;
+	float:left;
+	background-color: rgba(255,255,255,0.92);
+	margin-left: 30px;
+	margin-top: 150px;
+	padding: 20px 30px;
+	border-radius: 40px;
+	text-align: left;
+	width:50%;
+}
+.login .instr ul{
+	list-style-type:none;
+	float: left;
+	color:red;
+	text-align: left;
+	font-size: 1.5vw;
+	font-family: Impact, Haettenschweiler, "Franklin Gothic Bold", "Arial Black", "sans-serif"
+}
+.login .instr ul li{
+	text-align: left;
+	color:blue;
+	font-size:1.2vw;
+	font-family: Constantia, "Lucida Bright", "DejaVu Serif", Georgia, "serif"
+}
+.login .instr .lnk1{
+	font-size:2vw;
+	background-color:greenyellow;
+	display: inline-block;
+}
+.login .instr a{
+	background-color:rgba(249,58,70,1.00);
+	text-decoration: none;
+	color:white;
+	padding:10px 20px;
+	border-radius:20px;
+	align-content: center;
+	margin-left:25%;
+}
+.login .instr a:hover{
+	background-color:rgba(155,31,33,1.00);
+}
+.login .lgnfrm{
+	position: relative;
+	margin-top:50px; 
+	margin-right: 50px;
+	display:block;
+	float: right;
+	padding:50px;
+	background-color:rgba(255,255,255,0.79);
+	border-radius:30px;
+}
+.login .lgnfrmtxt{
+	font-size:1.5vw;
+	color:blue;
+	font-family: Consolas, "Andale Mono", "Lucida Console", "Lucida Sans Typewriter", Monaco, "Courier New", "monospace";
+	text-align: center;
+	font-weight: bold;
+}
+.lgnfrm input[type=text],.lgnfrm input[type=password]{
+    width: 90%;
+	padding: 12px 20px;
+	margin: 8px 0;
+	box-sizing: border-box;
+	border: none;
+	border-bottom: 2px solid red;
+	background-color: rgba(255,255,255,0.0);
+	text-align: center;
+	font-size: 1.5vw;
+	font-weight: bold;
+	font-family: Consolas, "Andale Mono", "Lucida Console", "Lucida Sans Typewriter", Monaco, "Courier New", "monospace";
+}
+.lgnfrm input[type=submit]{
+	width: 90%;
+	margin-top: 20px;
+	margin-bottom: 10px;
+	color:white;
+	background-color:green;
+	padding: 10px;
+	border-radius: 20px;
+	font-size: 1.5vw;
+	font-weight: bold;
+}
+.lgnfrm input[type=submit]:hover{
+	background-color:#00FF00;
+	cursor: pointer;
+}
+.lgnfrm input[type=reset]{
+	width: 90%;
+	padding:10px;
+	border-radius: 20px;
+	background-color:tomato;
+	color:white;
+	font-size:1.5vw;
+	font-weight: bold;
+}
+.lgnfrm input[type=reset]:hover{
+	background-color:red;
+	cursor: pointer;
+	
+}
+.lgnfrm .lgnimg{
+	position:relative;
+	margin-left:120px; 
+	max-height: 100px;
+	width: auto;
+	border-radius: 80%;
+	align:center;
+	margin-bottom: 5vh;
+	border:2px solid red;
+}
+.error{
+	color:red;
+	font-size:1em;
+}
+/*here starts the logout page CSS */
+.lgbody{
+	background: url("logout.jpg");
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	background-position: center;
+	background-size: cover;
+	min-height: 100vh;
+}
+ .lgout{
+	 position: relative;
+	 top:200px;
+	 left:25%;
+	 width: 50%;
+	 background-color:aqua;
+	 padding:20px;
+	 border-radius: 40px;
+	 align-self: center;
+	 font-size:1.5vw;
+     color:blue;
+	 text-align: center;
+	 margin-bottom: 40vh;
+}
+.lgout input[type=submit]{
+	padding: 20px 40px;
+	font-size:1.5vw;
+	color:white;
+	background-color:red;
+	border-radius: 30px;
+	width: 80%
+}
+.lgout input[type=submit]:hover{
+	background-color:rgba(192,0,3,1.00);
+	cursor: pointer;
+}
+/* here starts profile page css */
+.prflbody {
+	background-image: url("p1.jpg");
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	background-position: center;
+	background-size: cover;
+	height: auto;
+}
+.prflbody .lginfo{
+	position: relative;
+	background-color: rgba(0,158,27,1.00);
+	float: none;
+	align-content: center;
+	width: 70%;
+	margin:5% 15%;
+	padding: 10px;
+	border-radius: 40px;
+	border:4px solid red;
+}
+.prflbody .lginfo legend{
+	margin-left: 40%;
+	position: relative;
+	text-align: center;
+	font-size:2vw;
+	color:white;
+	border:2px solid red;
+	background-color:yellowgreen;
+	padding: 10px;
+	border-top-left-radius: 20px;
+	border-bottom-right-radius: 20px;
+}
+.prflbody .lginfo table{
+	width: 80%;
+	margin-left: 10%;
+}
+.prflbody .lginfo table th{
+	padding-top: 10px;
+	font-size: 1.5vw;
+	color:white;
+	text-align: right;
+}
+.prflbody .lginfo input[type=text]{
+	border:none;
+	font-size: 1.5vw;
+	width: 80%;
+	transition: 0.5s;
+	background-color:rgba(0,158,27,1.00);
+	color: white;
+}
+.prflbody .lginfo input[type=password]{
+	border:none;
+	font-size: 1.5vw;
+	width: 80%;
+	transition: 0.5s;
+	background-color:rgba(0,158,27,1.00);
+	color: white;
+	font-weight: bolder;
+	
+}
+.prflbody .lginfo input[type=submit]{
+	border-radius: 20px;
+	font-size:1.5vw;
+	padding: 5px 10px;
+	color:white;
+	background-color: red;
+	cursor: pointer;
+	width: 100%
+}
+.prflbody .lginfo input[type=submit]:hover{
+	background-color:rgba(156,0,2,1.00);
+}
+.prflbody .lginfo input[type=text]:hover,.prflbody .lginfo input[type=text]:active{
+	border-bottom: 2px solid red;
+}
+/* here starts the notifications CSS */
+.notbody{
+	
+}
+.notbody .rqewst{
+	float:left;
+	position: relative;
+	padding: 20px;
+	top:10vh;
+	font-size:1.5vw;
+	color:white;
+	background-color:#595959;
+	border-radius: 50px;
+	text-align: center;
+	width: 20vw;
+	margin-left: 10vw;
+	margin-bottom: 40vh;
+}
+.notbody .rqewst:hover{
+	background-color:rgba(11,79,183,1.00);
+	cursor: pointer;
+	box-shadow: 5px 5px 20px 10px rgba(0,255,60,1.00);
+}
+/* here starts database sidenave thing */
+.database .side {
+	padding: 0px 20px 0px 0px;
+	height: auto;
+	width: 20vw;
+	position: fixed;
+	top:26vh;
+	left: 0;
+	background-color: #888888;
+	z-index: 2;
+	color:white;
+	overflow-x: hidden;
+	border:2px solid red;
+	bottom: 0;
+}
+.database .side a{
+	float: left;
+	width: 20vw;
+	padding: 20px 40px 20px 0px;
+	text-decoration: none;
+	color:white;
+	font-weight: border;
+	text-align: center;
+	font-size: 1.5vw;
+}
+.database .side a:hover{
+	background-color:rgba(210,210,210,1.00);
+}
+.database .main1{
+	margin-left: 20vw;
+	float: left;
+	
+}
+.database .main1 h1{
+	margin-top: 0;
+	float: left;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	width: 74vw;
+	text-align: center;
+	background-color: #00971A;
+	border-top-right-radius: 20px;
+	border-bottom-right-radius: 20px;
+	color:white;
+}
+.database .main1 table{
+	border-collapse: collapse;
+	width: 80vw;
+}
+.database .main1 table th{
+	background-color: #9900AD;
+	padding: 10px;
+	font-size: 1.3vw;
+	color:white;
+	border-left: 1px dotted black;
+}
+.database .main1 table td{
+	padding: 10px;
+	text-align: center;
+}
+.database .main1 table tr:nth-child(even){
+	background-color:#CFCFCF;
+}
+.database .main1 #delete{
+	border-radius: 8px;
+	background-color:red;
+	color:white;
+	font-weight: bolder;
+}
+.database .main1 #delete:hover{
+	background-color:#A80002; 
+	cursor: pointer;
+}
+.database .main1 #update{
+	border-radius: 8px;
+	background-color:#02FF00;
+	font-weight: bolder;
+}
+.database .main1 #update:hover{
+	background-color:#147800;
+	cursor: pointer;
+	color:white;
+}
+/*here Starts footer page thing*/
+.footer{
+	width: 100%;
+	float: left;
+}
+.footer hr {
+	margin-top: 15vh;
+	height: 2vh;
+	background-color:#FFDD00;
+}
+/* here starts insertpage CSS*/
+.ifeld{
+	float: left;
+	width: 75vw;
+	background-color:#A3A3A3;
+	border-top-right-radius: 40px;
+	border-bottom-right-radius: 40px;
+	color: white;
+	font-size: 1.4vw;
+}
+.ifeld legend{
+	text-align: center;
+	margin-left: 40%;
+	font-size: 1.5vw;
+	color:white;
+	background-color:purple;
+	border-radius: 10px;
+	padding: 4px;
+	
+}
+.ifeld select{
+	width: 20vw;
+	padding: 10px;
+	border-radius: 20px;
+	}
+.ifeld .text{
+	margin: 5px;
+	margin-top: 40px;
+}
+.ifeld input[type=date]{
+	width: 20vw;
+	padding: 10px;
+	text-align: center;
+	border-radius: 20px;
+}
+.ifeld input[type=text]{
+	width: 15vw;
+	padding: 10px;
+	border-radius: 20px;
+}
+.ifeld button[type=submit]{
+	float: right;
+	background-color:#00DC04;
+	padding: 10px;
+	border-radius: 20px;
+	color:white;
+}
+.ifeld button[type=submit]:hover{
+	cursor: pointer;
+	background-color:#04A303;
+}
+.ifeld table {
+	width: 80vw;
+}
+.ifeld table th{
+	padding: 4px;
+}
+/* delete page Starts Here */
+.del {
+	background-image: url("delete.jpg");
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	background-position: center;
+	background-size: cover;
+	height: auto;
+}
+.del .men {
+	background-color: white;
+	width: 60vw;
+	margin-left: 20%;
+	margin-top:10%;
+	color:blue;
+	border-radius: 40px;
+	text-align: center;
+	font-size: 2vw;
+	padding: 20px;
+	height: auto;
+}
+.del .men button[type=submit]{
+	font-size:2vw;
+	padding: 5px;
+	background-color:red;
+	border-radius: 10px;
+}
+.del .men button[type=submit]:hover{
+	background-color:#930B0E;
+	cursor: pointer;
+}
+/* here starts feedback form css */
+.feedback h1 {
+	background-color:#0049CB;
+	margin-top: 0;
+	float: left;
+	padding: 10px;
+	color:white;
+	border-top-right-radius: 20px;
+	border-bottom-right-radius: 20px;
+}
+.feedback fieldset {
+	width: 80vw;
+	float: left;
+	background-color: #B7B7B7;
+	color:white;
+	border-top-right-radius: 40px;
+	border-bottom-right-radius: 40px;
+}
+.feedback fieldset legend{
+	font-size: 1.3vw;
+	margin-left: 40%;
+	background-color: #08199B;
+	padding: 10px;
+	border-radius: 20px;
+	font-weight: bolder;
+}
+.feedback table {
+	width: 80vw;
+}
+.feedback table th {
+ vertical-align: top;
+padding: 5px;
+	text-align: left;
+	
+}
+.feedback input[type=text]{
+	padding: 5px;
+	border-radius: 10px;
+	font-size:1.2vw;
+}
+.feedback textarea{
+	padding: 5px;
+	border-radius: 10px;
+	border-style: groove;
+}
+.feedback button[type=submit]{
+	padding: 10px;
+	background-color:green;
+	color:white;
+	font-size: 1.4vw;
+	align-self: center;
+	border-radius: 10px;
+}
+.feedback button[type=submit]:hover{
+	cursor: pointer;
+	background-color:#79FF00;
+}
+.feedback table td {
+	text-align: center;
+}
+.feedback input[type=date]{
+	padding: 5px;
+	border-radius: 10px;
+	font-size:1.2vw;
+}
+.feedback select{
+	padding: 5px;
+	border-radius: 10px;
+	font-size:1.2vw;
+}
+.appontbody {
+	background-image: url("appointment.jpg");
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	background-position: center;
+	background-size: cover;
+	height: auto;
+}
+/* here starts apontment table css */
+.feedback .main1{
+	margin-left: 20vw;
+	float: left;
+	
+}
+.feedback .main1 h1{
+	margin-top: 0;
+	float: left;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	width: 74vw;
+	text-align: center;
+	background-color: #00971A;
+	border-top-right-radius: 20px;
+	border-bottom-right-radius: 20px;
+	color:white;
+
+}
+/* here starts home page css */
+.hbody{
+	background-image: url("p2.jpg");
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	background-position: center;
+	background-size: cover;
+	height: auto;
+}
+.home {
+	float: left;
+	background-color:white;
+	margin-top: 20vh;
+	font-size: 1.5vw;
+	padding: 30px;
+	border-radius: 40px;
+	margin: 20vw;
+}
+/*here Starts Search css*/
+.search {
+	font-size:1.5vw;
+	float:right;
+}
+.search input[type=text]{
+	padding:5px;
+	border-radius:40px;
+}
